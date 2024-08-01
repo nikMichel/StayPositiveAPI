@@ -2,14 +2,14 @@
 import re
 #import torch
 import json
-from transformers import BertTokenizer, TFBertForMaskedLM, pipeline
+#from transformers import BertTokenizer, TFBertForMaskedLM, pipeline
 #import tensorflow as tf
 from fastapi import FastAPI, Body
 from pydantic import BaseModel, validator
 import mlm
-import classifier
-from mlm import getTopNumOfPredictions
-from classifier import classifyIfPositive
+import classifier as cl
+#from mlm import getTopNumOfPredictions
+#from classifier import classifyIfPositive
 import logging
 
 logging.basicConfig(level=logging.ERROR, filename='staypostiive_access.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%dT%H:%M:%SZ")
@@ -75,12 +75,12 @@ async def positiveResponseOnly(input: Input):
       text = re.sub(r"<blank>", "[MASK]", text)
       text = re.sub("\[MASK\]$", "[MASK].", text)
       logger.info(f"input: {text}")
-      output = getTopNumOfPredictions(text)
-      positive_only = classifyIfPositive(output)
+      output = mlm.getTopNumOfPredictions(text)
+      positive_only = cl.classifyIfPositive(output)
       logger.info(f"output: {positive_only}")
       return {"output": positive_only}
     except Exception as e:
-      logger.error("Was unable to get postive suggestions")
+      logger.error("Was unable to get positive suggestions")
 
     
 @app.post('/all/', tags=["all"])
@@ -92,7 +92,7 @@ async def allResponses(input: Input):
       text = re.sub(r"<blank>", "[MASK]", text)
       text = re.sub("\[MASK\]$", "[MASK].", text)
       logger.info(f"input: {text}")
-      all_responses = getTopNumOfPredictions(text)
+      all_responses = mlm.getTopNumOfPredictions(text)
       logger.info(f"output: {all_responses}")
       return {"output": all_responses}
     except Exception as e:
@@ -101,4 +101,4 @@ async def allResponses(input: Input):
 
 if __name__ == "__main__":
   import uvicorn
-  uvicorn.run("app:app", reload=True, port=8000, host="0.0.0.0")
+  uvicorn.run("app:app", reload=False, port=8000, host="0.0.0.0")
