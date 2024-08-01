@@ -14,7 +14,7 @@ and receive text suggestions that can fill in the blank in a way that makes the 
 ├── Dockerfile
 ├── README.md
 ├── app.py
-├── requirements.txt
+└── requirements.txt
 ```
 
 ## Local Deployment
