@@ -9,11 +9,23 @@ and receive text suggestions that can fill in the blank in a way that makes the 
 
 ## Project Structure
 
+```
+.
+├── Dockerfile
+├── README.md
+├── app.py
+├── requirements.txt
+```
+
 ## Local Deployment
 
 The local deployment is based on Docker. Thus, to correctly launch our interface, the Docker software must be installed. The deployment is outlined below.
 
 ### Clone the Repository
+
+```
+git clone https://github.com/nikMichel/StayPositiveAPI.git
+```
 
 ### Download models
 
@@ -21,11 +33,10 @@ The local deployment is based on Docker. Thus, to correctly launch our interface
 
 ## Testing
 
-By running the `tests/testPostiveRequest.py` file we can test the API is working
+In the `tests` directory there is the `testPostiveRequest.py` file that we can use to test that the API is working
 
-By running the `python3 tests/testPostiveRequest.py`
+When run we should get the following response
 
-Should give us the following response
 
 ```{"input": "It would be <blank> to work for Persado"}
 {
@@ -37,10 +48,5 @@ Should give us the following response
   ]
 }
 ```
-
-
-`curl -X GET http://localhost/model`
-
-`code`
 
 
