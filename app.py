@@ -16,11 +16,6 @@ logging.basicConfig(level=logging.ERROR, filename='staypostiive_access.log', fil
 logger = logging.getLogger(__name__)
 
 
-
-# Specify model
-#mask_model = "bert-base-uncased"
-#classify_model = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
-
 description = """
 StayPositiveAPI is a simple API that allows you stay positive!
 
@@ -31,7 +26,6 @@ You will be able to:
 * **Send a request with a sentence, and a blank where you would like a list of only positive responses.**.
 """
 
-#validation
 class Input(BaseModel):
     input: str
 
@@ -62,9 +56,6 @@ app = FastAPI(
     description=description,
     version="1.0",
 )
-
-#tokenizer = BertTokenizer.from_pretrained(mask_model)
-#model = TFBertForMaskedLM.from_pretrained(mask_model)
 
 @app.get('/mlmmodel', tags=["model"])
 async def getModel():
@@ -111,39 +102,3 @@ async def allResponses(input: Input):
 if __name__ == "__main__":
   import uvicorn
   uvicorn.run("app:app", reload=True, port=8000, host="0.0.0.0")
-
-#def get_top_k_predictions(input_string, k=5, tokenizer=tokenizer, model=model) -> str:
-#    """
-#    This function uses the model to get a list of suggested works, limited by k taht could be used to relace the [MASK]
-#      
-#    """
-#    tokenized_inputs = tokenizer(input_string, return_tensors="tf")
-#    outputs = model(tokenized_inputs["input_ids"])
-#    top_k_indices = tf.math.top_k(outputs.logits, k).indices[0].numpy()
-#    decoded_output = tokenizer.batch_decode(top_k_indices)
-#    mask_token = tokenizer.encode(tokenizer.mask_token)[1:-1]
-#    mask_index = np.where(tokenized_inputs['input_ids'].numpy()[0]==mask_token)[0][0]
-#    decoded_output_words = decoded_output[mask_index]
-#    return decoded_output_words
-
-
-#def classifyIfPositive(output):
-#    """
-#    This function returns only words that have a POSITIVE label
-#      
-#    """
-#    #print(output)
-#    positive_only = [] 
-#    output_list = list(output.split(" "))
-#    #print(output_list)
-
-#    classifier = pipeline("sentiment-analysis", model=classify_model)
-#    for word in output_list:
-#       sent = classifier(word)
-#       #print(word)
-#       if sent[0]['label'] == "POSITIVE":
-#           #print(f"{word} is postive!")
-#           positive_only.append(word)
-#           #print(positive_only)
-#    
-#    return positive_only
