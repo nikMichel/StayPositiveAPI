@@ -15,6 +15,8 @@ and receive text suggestions that can fill in the blank in a way that makes the 
 ├── README.md
 ├── app.py
 └── requirements.txt
+└── tests
+    └── testPostiveRequest.py
 ```
 
 ## Local Deployment
@@ -31,7 +33,10 @@ git clone https://github.com/nikMichel/StayPositiveAPI.git
 
 ### Build the Docker Image
 
+
 ## Testing
+
+### Ready script
 
 In the `tests` directory there is the `testPostiveRequest.py` file that we can use to test that the API is working
 
@@ -49,4 +54,5 @@ When run we should get the following response
 }
 ```
 
+### Manually
 
