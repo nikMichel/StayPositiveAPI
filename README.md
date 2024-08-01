@@ -27,16 +27,16 @@ By running the `python3 tests/testPostiveRequest.py`
 
 Should give us the following response
 
-`{"input": "It would be <blank> to work for Persado"}`
-`{`
-  `"output": [`
-    `"easy",`
-    `"nice",`
-    `"easier",`
-    `"good"`
-  `]`
-`}`
-
+```{"input": "It would be <blank> to work for Persado"}
+{
+  "output": [
+    "easy",
+    "nice",
+    "easier",
+    "good"
+  ]
+}
+```
 
 
 `curl -X GET http://localhost/model`
