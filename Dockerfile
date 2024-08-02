@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 WORKDIR /app
  
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY ./src /app
 
 RUN /app/downloadModels.py
  

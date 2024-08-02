@@ -24,11 +24,13 @@ Output: good, delicious, amazing, great,
 ├── README.md
 ├── app.py
 └── classifier.py
+└── docker-compose.yml
 └── downloadModels.py
 └── mlm.py
 └── requirements.txt
 └── tests
     └── testPostiveRequest.py
+    └── testAllRequest.py
 ```
 
 ## API Endpoints
@@ -37,13 +39,13 @@ There are three API endpoints exposed
 
 1. `/mlmmodel` (method: GET, response: JSON String): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
 
-2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment (max 5). Body must be a JSON object with the following property:
+2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment (maximum 5). Body must be a JSON object with the following property:
     
      - `input` (string, required): The phrase or sentence we want to retrieve all suggested words. Must contain a `<blank>` in place where we require the suggested word.
                                    
-3. `/positive` (method: POST, response JSON List): This will return only suggestions with a positive sentiment (max 5). Body must be a JSON object with the following property:
+3. `/positive` (method: POST, response JSON List): This will return only suggestions with a positive sentiment (maximum 5). Body must be a JSON object with the following property:
 
-     - `input` (string, required): The phrase or sentence we want to retrieve a suggested word with positive sentiment. Must contain a `<blank>` in place we require the suggested postive word.
+     - `input` (string, required): The phrase or sentence we want to retrieve a suggested word with positive sentiment. Must contain a `<blank>` in place we require the suggested positive word.
 
 
 ### Examples
@@ -96,7 +98,7 @@ git clone https://github.com/nikMichel/StayPositiveAPI.git
 
 ### Build the Docker Image
 
-You need to build the Docker Image based on this repository Dockerfile. To do so, you can use the following command.
+You need to build the Docker Image based on this repository Dockerfile. To do so, you can use the following command. Change into the `StayPosiiveAPI` directory created.
 
 `sudo docker build -t {IMAGE_TAG} .`
 
@@ -128,10 +130,25 @@ CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS
 440d7aec7b48   staypositiveapi   "uvicorn app:app --h…"   3 minutes ago   Up 3 minutes   0.0.0.0:80->8000/tcp, :::80->8000/tcp   staypositive
 ```
 
+### Use Docker Compose
+
+An simple `docker-compose.yml` file could like the following:
+
+```
+version: '3'
+services:
+ staypositive:
+  image: staypositiveapi
+  container_name: staypositive
+  ports:
+   - "80:8000"
+```
+
+
 
 ## Logging
 
-Logging has been configured to log to the `staypositive_access.log` file, in the containers `/var/log` directory.
+Logging has been configured to log to the `staypositive_access.log` file.
 
 
 ## Test scripts
