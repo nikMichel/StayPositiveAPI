@@ -24,6 +24,7 @@ Output: good, delicious, amazing, great,
 ├── README.md
 ├── app.py
 └── classifier.py
+└── downloadModels.py
 └── mlm.py
 └── requirements.txt
 └── tests
@@ -34,7 +35,7 @@ Output: good, delicious, amazing, great,
 
 There are three API endpoints exposed
 
-1. `/mlmmodel` (method: GET): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
+1. `/mlmmodel` (method: GET, response: JSON String): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
 
 2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment (max 5). Body must be a JSON object with the following property:
     
@@ -92,8 +93,6 @@ The local deployment is based on Docker. Therefore, to correctly launch the API 
 ```
 git clone https://github.com/nikMichel/StayPositiveAPI.git
 ```
-
-### Download models
 
 ### Build the Docker Image
 

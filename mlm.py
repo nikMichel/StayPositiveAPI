@@ -3,10 +3,14 @@ import tensorflow as tf
 import numpy as np
 
 mask_model = "bert-base-uncased"
+mask_model_path = "models/" + mask_model + "/"
 #mask_model = "distilbert/distilbert-base-uncased"
 #classify_model = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
-tokenizer = BertTokenizer.from_pretrained(mask_model)
-model = TFBertForMaskedLM.from_pretrained(mask_model)
+#tokenizer = BertTokenizer.from_pretrained(mask_model)
+#model = TFBertForMaskedLM.from_pretrained(mask_model)
+
+tokenizer = BertTokenizer.from_pretrained(mask_model_path, local_files_only=True)
+model = TFBertForMaskedLM.from_pretrained(mask_model_path, local_files_only=True)
 
 
 def getTopNumOfPredictions(input_string, k=5, tokenizer=tokenizer, model=model) -> str:

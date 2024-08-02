@@ -1,10 +1,11 @@
 from transformers import BertTokenizer, TFBertForMaskedLM, pipeline
-#from transformers import (BertTokenizerFast,TFBertForMaskedLM,TFBertTokenizer,BertTokenizer,RobertaTokenizerFast,
-#                          DataCollatorWithPadding,TFRobertaForSequenceClassification,TFBertForSequenceClassification,
-#                          TFBertModel,create_optimizer,pipeline)
+
 
 classify_model = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
-classifier = pipeline(model=classify_model)
+classify_model_path = "models/" + classify_model + "/"
+#print(classify_model_path)
+#classifier = pipeline(model='models/distilbert/distilbert-base-uncased-finetuned-sst-2-english', local_files_only=True)
+classifier = pipeline("sentiment-analysis", model=classify_model_path)
 
 
 def classifyIfPositive(output):

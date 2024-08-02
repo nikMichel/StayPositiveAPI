@@ -7,7 +7,7 @@ import classifier as cl
 import logging
 
 
-logging.basicConfig(level=logging.DEBUG, filename='/var/log/staypostiive_access.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%dT%H:%M:%SZ")
+logging.basicConfig(level=logging.DEBUG, filename='staypostiive_access.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%dT%H:%M:%SZ")
 logger = logging.getLogger(__name__)
 
 
