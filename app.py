@@ -1,18 +1,13 @@
-#import numpy as np
 import re
-#import torch
 import json
-#from transformers import BertTokenizer, TFBertForMaskedLM, pipeline
-#import tensorflow as tf
 from fastapi import FastAPI, Body
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, Field
 import mlm
 import classifier as cl
-#from mlm import getTopNumOfPredictions
-#from classifier import classifyIfPositive
 import logging
 
-logging.basicConfig(level=logging.ERROR, filename='staypostiive_access.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%dT%H:%M:%SZ")
+
+logging.basicConfig(level=logging.DEBUG, filename='/var/log/staypostiive_access.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%dT%H:%M:%SZ")
 logger = logging.getLogger(__name__)
 
 
@@ -27,12 +22,12 @@ You will be able to:
 """
 
 class Input(BaseModel):
-    input: str
+    input: str = Field(..., max_length=50)
 
     @validator("input")
     def ensure_blank(cls, v):
         if '<blank>' not in v:
-            raise ValueError("You must use <blank> in the sentence.")
+            raise ValueError("You must use <blank> in the phrase.")
         return v
 
 tags_metadata = [

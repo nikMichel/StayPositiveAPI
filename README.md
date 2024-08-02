@@ -2,7 +2,7 @@
 
 ## Description
 
-StayPositiveAPI is a simple API that allows you stay positive!
+StayPositiveAPI is a simple API that allows stay positive by getting only positive word suggestions!
 
 Specifically, it is an API that provides positive suggestions to a phrase submitted by the end-user.
 
@@ -38,11 +38,11 @@ There are three API endpoints exposed
 
 2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment. Body must be a JSON object with the following property:
     
-  - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
                                    
 3. `/positive` (method: POST, response JSON List): This will return only suggestions with a postive sentiment. Body must be a JSON object with the following property:
 
-  - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
 
 
 ### Examples
@@ -112,7 +112,7 @@ Run the Docker Conatiner based on the Docker Image you just built.
 
 ## Logging
 
-Logging has been configured to log to the `staypositive_access.log` file.
+Logging has been configured to log to the `staypositive_access.log` file, in the containers `/var/log` directory.
 
 
 ## Test scripts
