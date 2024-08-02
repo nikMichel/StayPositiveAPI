@@ -38,11 +38,11 @@ There are three API endpoints exposed
 
 `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment. Body must be a JSON object with the following property:
     
-    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+    `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
                                    
 `/positive` (method: POST, response JSON List): This will return only suggestions with a postive sentiment. Body must be a JSON object with the following property:
 
-    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+    `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
 
 
 ### Examples
