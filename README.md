@@ -7,6 +7,21 @@ StayPositiveAPI is a simple API that allows you stay positive!
 Specifically, the end–user wants to provide an English sentence that has a blank or missing part, 
 and receive text suggestions that can fill in the blank in a way that makes the sentence sound positive.
 
+Examples:
+
+Input: have a <blank> day
+Output: good, excellent, amazing
+
+Input: the application was <blank>
+Output: well designed, so pretty, the best I’ve ever seen
+
+## Usage
+
+We need to send a HTTP POST Request to the the API , with JSON Data in the body with the following schema.
+
+The Phrase should include a <blank> where we want the API to return a word with a positive sentiment.
+
+
 ## Project Structure
 
 ```
@@ -20,6 +35,17 @@ and receive text suggestions that can fill in the blank in a way that makes the 
 └── tests
     └── testPostiveRequest.py
 ```
+
+## API Endpoints
+
+There are three API endpoints exposed
+
+`/mlmmodel` - This will return the Pretrained model used on rthe English language using a masked language modeling (MLM) objective.
+
+`/all` - This will return the suggestions regardless of sentiment.
+
+`/positive` - This will return only suggestion with a postive sentiment.
+
 
 ## Local Deployment
 
@@ -35,10 +61,25 @@ git clone https://github.com/nikMichel/StayPositiveAPI.git
 
 ### Build the Docker Image
 
+You need to build the Docker Image based on this repository Dockerfile. To do so, you can use the following command.
 
-## Testing
+`docker build -t {TAG} .`
 
-### Ready script
+`{TAG}` is the name you want to give your Docker Image.
+
+### Build the Docker Image
+
+Run the Docker Conatiner based on the Docker Image you just built.
+
+`docker run -d -p 80:8000 {TAG}`
+
+
+## Logging
+
+
+## Example Usage
+
+### Test script
 
 In the `tests` directory there is the `testPostiveRequest.py` file that we can use to test that the API is working
 
@@ -58,3 +99,13 @@ When run we should get the following response
 
 ### Manually
 
+We can use `curl` to manually test the API
+
+```curl -X 'POST' \
+  'http://localhost/positive/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "input": "It would be <blank> to work at Persado"
+}'
+```
