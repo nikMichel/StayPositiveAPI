@@ -8,8 +8,8 @@ Specifically, it is an API that provides positive suggestions to a phrase submit
 
 Examples:
 
- Input: Today was a `<blank>` day, Output: good, excellent, amazing
- Input: the food was `<blank>`,  Output: good, delicious, amazing, great,
+- **Input:** Today was a `<blank>` day, **Output:** good, excellent, amazing
+- **Input:** the food was `<blank>`,  **Output:** good, delicious, amazing, great,
 
 
 ## Project Structure
