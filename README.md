@@ -4,22 +4,16 @@
 
 StayPositiveAPI is a simple API that allows you stay positive!
 
-Specifically, the end–user wants to provide an English sentence that has a blank or missing part, 
-and receive text suggestions that can fill in the blank in a way that makes the sentence sound positive.
+Specifically, it is an API that provides positive suggestions to a phrase submitted by the end-user.
 
 Examples:
 
-Input: have a <blank> day
+Input: Today was a <blank> day
 Output: good, excellent, amazing
 
-Input: the application was <blank>
-Output: well designed, so pretty, the best I’ve ever seen
+Input: the food was <blank>
+Output: good, delicious, amazing, great,
 
-## Usage
-
-We need to send a HTTP POST Request to the the API , with JSON Data in the body with the following schema.
-
-The Phrase should include a `<blank>` where we want the API to return a wword suggestion with a positive sentiment.
 
 
 ## Project Structure
@@ -40,20 +34,20 @@ The Phrase should include a `<blank>` where we want the API to return a wword su
 
 There are three API endpoints exposed
 
-- `/mlmmodel` (method: GET): This will return the Pretrained model used on rthe English language using a masked language modeling (MLM) objective. (GET)
+`/mlmmodel` (method: GET): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
 
-- `/all` (method: POST): This will return suggestions regardless of sentiment. Returns JSON string object. Must be a JSON object with the following property:
+`/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment. Body must be a JSON object with the following property:
     
     - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
                                    
-- `/positive` (method: POST): This will return only suggestions with a postive sentiment. Returns JSON list object. Must be a JSON object with the following property:
+`/positive` (method: POST, response JSON List): This will return only suggestions with a postive sentiment. Body must be a JSON object with the following property:
 
     - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
 
 
 ### Examples
 
-Postive only suggestions
+Postiive only suggestions
 
 Request:
 
@@ -89,7 +83,7 @@ Response:
 
 ## Local Deployment
 
-The local deployment is based on Docker. Thus, to correctly launch our interface, the Docker software must be installed. The deployment is outlined below.
+The local deployment is based on Docker. Therefore, to correctly launch the API Service, Docker software must be installed. The deployment is outlined below.
 
 ### Clone the Repository
 
@@ -116,15 +110,18 @@ Run the Docker Conatiner based on the Docker Image you just built.
 
 ## Logging
 
-Logging has been configured to log to the `staypostiveapi.log` file in project directory.
+Logging has been configured to log to the `staypositive_access.log` file.
 
 
 ## Test scripts
 
-In the `tests` directory there is the `testPostiveRequest.py` file that we can use to test that the API is working
+In the `tests` directory there are two scripts that can be use to test the API.
 
-When run we should a response similr to the following
+- `testPostiveRequest.py` Used to test Positive only responses, that is the `/positive` API endpoint.
+- `testAllRequest.py` Used to test All responses, that is the `/all` API endpoint
 
+
+When run the `testPostiveRequest.py` script, we should a response similar to the following
 
 ```{"input": "It would be <blank> to work at Persado"}
 {
@@ -137,17 +134,10 @@ When run we should a response similr to the following
 }
 ```
 
-We can use `curl` to manually test the API
+When run the `testAllRequest.py` script, we should a response similar to the following
 
-```ccurl -X 'POST' \
-  'http://127.0.0.1/positive/' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "input": "It would be <blank> to work at Persado"
-}'
+```{"input": "It would be <blank> to work at Persado"}
+{
+  "output": "nice good easy great easier"
+}
 ```
-
-And we should get a response similar to the following:
-
-```{"output":["nice","good","easy","great","easier"]}```
