@@ -19,7 +19,7 @@ Output: well designed, so pretty, the best I’ve ever seen
 
 We need to send a HTTP POST Request to the the API , with JSON Data in the body with the following schema.
 
-The Phrase should include a <blank> where we want the API to return a word with a positive sentiment.
+The Phrase should include a `<blank>` where we want the API to return a wword suggestion with a positive sentiment.
 
 
 ## Project Structure
@@ -76,6 +76,7 @@ Run the Docker Conatiner based on the Docker Image you just built.
 
 ## Logging
 
+Logging has been configured to log to the `staypostiveapi.log` file in project directory.
 
 ## Example Usage
 
