@@ -34,13 +34,13 @@ Output: good, delicious, amazing, great,
 
 There are three API endpoints exposed
 
-`/mlmmodel` (method: GET): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
+1. `/mlmmodel` (method: GET): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
 
-`/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment. Body must be a JSON object with the following property:
+2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment. Body must be a JSON object with the following property:
     
   - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
                                    
-`/positive` (method: POST, response JSON List): This will return only suggestions with a postive sentiment. Body must be a JSON object with the following property:
+3. `/positive` (method: POST, response JSON List): This will return only suggestions with a postive sentiment. Body must be a JSON object with the following property:
 
   - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
 
@@ -51,7 +51,8 @@ Postiive only suggestions
 
 Request:
 
-```curl -X 'POST' \
+```
+curl -X 'POST' \
   'http://127.0.0.1/positive/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
@@ -67,7 +68,8 @@ Response:
 
 All suggestions
 
-```curl -X 'POST' \
+```
+curl -X 'POST' \
   'http://192.168.230.120/all/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
