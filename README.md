@@ -102,8 +102,8 @@ When run we should get the following response
 
 We can use `curl` to manually test the API
 
-```curl -X 'POST' \
-  'http://localhost/positive/' \
+```ccurl -X 'POST' \
+  'http://127.0.0.1/positive/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
