@@ -8,11 +8,11 @@ Specifically, it is an API that provides positive suggestions to a phrase submit
 
 Examples:
 
-Input: Today was a <blank> day
-Output: good, excellent, amazing
+ - Input: Today was a "<blank>" day
+ - Output: good, excellent, amazing
 
-Input: the food was <blank>
-Output: good, delicious, amazing, great,
+ - Input: the food was "<blank>"
+ - Output: good, delicious, amazing, great,
 
 
 
@@ -22,12 +22,12 @@ Output: good, delicious, amazing, great,
 .
 ├── Dockerfile
 ├── README.md
-├── app.py
-└── classifier.py
-└── docker-compose.yml
-└── downloadModels.py
-└── mlm.py
 └── requirements.txt
+└── src
+    └── app.py
+    └── classifier.py
+    └── downloadModels.py
+    └── mlm.py
 └── tests
     └── testPostiveRequest.py
     └── testAllRequest.py
@@ -132,7 +132,7 @@ CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS
 
 ### Use Docker Compose
 
-An simple `docker-compose.yml` file could like the following:
+An simple `docker-compose.yml` file could be like the following:
 
 ```
 version: '3'
