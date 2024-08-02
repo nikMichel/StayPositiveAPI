@@ -13,9 +13,10 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 # Set the working directory to /app
 WORKDIR /app
  
-# Copy the current directory contents into the container at /app
+# Copy the source directory contents into the container at /app
 COPY ./src /app
 
+# Copy the models to locally.
 RUN /app/downloadModels.py
  
 # Start the FastAPI app on port 8000

@@ -69,7 +69,7 @@ Recieve all suggestions
 
 ```
 curl -X 'POST' \
-  'http://192.168.230.120/all/' \
+  'http://127.0.0.1/all/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -102,7 +102,7 @@ You need to build the Docker Image based on this repository Dockerfile. To do so
 
 Example: `sudo docker build -t staypositiveapi .`
 
-### Build the Docker Image
+### Run the Docker Container
 
 Run the Docker Conatiner based on the Docker Image name you just built.
 
@@ -110,7 +110,7 @@ Run the Docker Conatiner based on the Docker Image name you just built.
 
 Example:
 
-`sudo docker run -d --name staypositive --rm -p 80:8000 staypositiveapi`
+`sudo docker run -d --name staypositive -p 80:8000 staypositiveapi`
 
 ### Check Container status
 

@@ -43,7 +43,7 @@ downloadMLMModel('models/' + mask_model, 'bert-base-uncased')
 downloadClassifierModel('models/' + classify_model, classify_model)
 
 
-tokenizer = BertTokenizer.from_pretrained('models/' + mask_model, local_files_only=True)
-model = TFBertForMaskedLM.from_pretrained('models/' + mask_model, local_files_only=True)
-classifier = pipeline('sentiment-analysis', model='models/' + classify_model, local_files_only=True)
+#tokenizer = BertTokenizer.from_pretrained('models/' + mask_model, local_files_only=True)
+#model = TFBertForMaskedLM.from_pretrained('models/' + mask_model, local_files_only=True)
+#classifier = pipeline('sentiment-analysis', model='models/' + classify_model, local_files_only=True)
 

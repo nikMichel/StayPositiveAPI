@@ -1,12 +1,8 @@
 from transformers import BertTokenizer, TFBertForMaskedLM, pipeline
 
-
 classify_model = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 classify_model_path = "models/" + classify_model + "/"
-#print(classify_model_path)
-#classifier = pipeline(model='models/distilbert/distilbert-base-uncased-finetuned-sst-2-english', local_files_only=True)
 classifier = pipeline("sentiment-analysis", model=classify_model_path)
-
 
 def classifyIfPositive(output):
     """
