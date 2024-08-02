@@ -40,11 +40,51 @@ The Phrase should include a `<blank>` where we want the API to return a wword su
 
 There are three API endpoints exposed
 
-`/mlmmodel` - This will return the Pretrained model used on rthe English language using a masked language modeling (MLM) objective.
+- `/mlmmodel` (method: GET): This will return the Pretrained model used on rthe English language using a masked language modeling (MLM) objective. (GET)
 
-`/all` - This will return the suggestions regardless of sentiment.
+- `/all` (method: POST): This will return suggestions regardless of sentiment. Returns JSON string object. Must be a JSON object with the following property:
+    
+    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+                                   
+- `/positive` (method: POST): This will return only suggestions with a postive sentiment. Returns JSON list object. Must be a JSON object with the following property:
 
-`/positive` - This will return only suggestion with a postive sentiment.
+    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+
+
+### Examples
+
+Postive only suggestions
+
+Request:
+
+```curl -X 'POST' \
+  'http://127.0.0.1/positive/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "input": "It would be <blank> to work at Persado"
+}'
+```
+
+Response:
+
+`{"output":["nice","good","easy","great","easier"]}`
+
+
+All suggestions
+
+```curl -X 'POST' \
+  'http://192.168.230.120/all/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "input": "It would be <blank> to work at Persado"
+}'
+```
+
+Response:
+
+`{"output":"nice good easy great easier"}`
 
 
 ## Local Deployment
@@ -78,16 +118,15 @@ Run the Docker Conatiner based on the Docker Image you just built.
 
 Logging has been configured to log to the `staypostiveapi.log` file in project directory.
 
-## Example Usage
 
-### Test script
+## Test scripts
 
 In the `tests` directory there is the `testPostiveRequest.py` file that we can use to test that the API is working
 
-When run we should get the following response
+When run we should a response similr to the following
 
 
-```{"input": "It would be <blank> to work for Persado"}
+```{"input": "It would be <blank> to work at Persado"}
 {
   "output": [
     "easy",
@@ -97,8 +136,6 @@ When run we should get the following response
   ]
 }
 ```
-
-### Manually
 
 We can use `curl` to manually test the API
 
@@ -110,3 +147,7 @@ We can use `curl` to manually test the API
   "input": "It would be <blank> to work at Persado"
 }'
 ```
+
+And we should get a response similar to the following:
+
+```{"output":["nice","good","easy","great","easier"]}```

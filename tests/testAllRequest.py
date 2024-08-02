@@ -3,7 +3,7 @@
 import requests
 import json
 
-url = "http://127.0.0.1/positive" # for docker if exposed to 80
+url = "http://127.0.0.1/all" # for docker if exposed to 80
 data = {"input": "It would be <blank> to work at Persado"}
 json_data = json.dumps(data)
 headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
