@@ -1,0 +1,11 @@
+fastapi
+fastapi-cli
+huggingface-hub
+numpy
+pydantic
+regex
+requests
+tensorflow
+tokenizers
+transformers
+tf-keras
