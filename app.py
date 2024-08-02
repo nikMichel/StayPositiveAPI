@@ -66,7 +66,7 @@ async def getModel():
     except Exception as e:
       logger.error("Was unable to get model")
     
-@app.post('/postive/', tags=["positive"])
+@app.post('/positive/', tags=["positive"])
 async def positiveResponseOnly(input: Input):
     """ Returns the list of words with positive sentiment """
     try:
