@@ -36,18 +36,18 @@ There are three API endpoints exposed
 
 1. `/mlmmodel` (method: GET): This will return the Pretrained model used on the English language using a masked language modeling (MLM) objective.
 
-2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment. Body must be a JSON object with the following property:
+2. `/all` (method: POST, response: JSON String): This will return suggestions regardless of sentiment (max 5). Body must be a JSON object with the following property:
     
-    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+     - `input` (string, required): The phrase or sentence we want to retrieve all suggested words. Must contain a `<blank>` in place where we require the suggested word.
                                    
-3. `/positive` (method: POST, response JSON List): This will return only suggestions with a postive sentiment. Body must be a JSON object with the following property:
+3. `/positive` (method: POST, response JSON List): This will return only suggestions with a positive sentiment (max 5). Body must be a JSON object with the following property:
 
-    - `input` (string, required): The phrase or sentence we want to retrieve the all suggested words. Must contain a `<blank>` where we reuired the suggested word.
+     - `input` (string, required): The phrase or sentence we want to retrieve a suggested word with positive sentiment. Must contain a `<blank>` in place we require the suggested postive word.
 
 
 ### Examples
 
-Postiive only suggestions
+Recieve only positive suggestions
 
 Request:
 
@@ -66,7 +66,7 @@ Response:
 `{"output":["nice","good","easy","great","easier"]}`
 
 
-All suggestions
+Recieve all suggestions
 
 ```
 curl -X 'POST' \
@@ -99,15 +99,35 @@ git clone https://github.com/nikMichel/StayPositiveAPI.git
 
 You need to build the Docker Image based on this repository Dockerfile. To do so, you can use the following command.
 
-`docker build -t {TAG} .`
+`sudo docker build -t {IMAGE_TAG} .`
 
-`{TAG}` is the name you want to give your Docker Image.
+`{IMAGE_TAG}` is the name you want to give your Docker Image.
+
+Example: `sudo docker build -t staypositiveapi .`
 
 ### Build the Docker Image
 
-Run the Docker Conatiner based on the Docker Image you just built.
+Run the Docker Conatiner based on the Docker Image name you just built.
 
-`docker run -d -p 80:8000 {TAG}`
+`sudo docker run -d --name {CONTAINER_NAME} -p 80:8000 {TAG}`
+
+Example:
+
+`sudo docker run -d --name staypositive --rm -p 80:8000 staypositiveapi`
+
+### Check Container status
+
+We then should be able to see the Container running using the `docker ps` command.
+
+`sudo docker ps`
+
+Example:
+
+```
+sudo docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                                   NAMES
+440d7aec7b48   staypositiveapi   "uvicorn app:app --h…"   3 minutes ago   Up 3 minutes   0.0.0.0:80->8000/tcp, :::80->8000/tcp   staypositive
+```
 
 
 ## Logging
